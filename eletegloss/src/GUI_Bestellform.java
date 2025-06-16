@@ -6,6 +6,8 @@ package eletegloss.src;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI_Bestellform extends JFrame{
 
@@ -17,9 +19,9 @@ public class GUI_Bestellform extends JFrame{
     private JTextField txtName, txtTel;
     private JComboBox<String> cboPaket;
     private JComboBox<Integer> cboAnzahl;
-    private JCheckBox chkVersiegelung, chkFelgen, chkInnenreinigung, chkAbholer;
+    private JCheckBox chkVersiegelung, chkFelgen, chkInnenreinigung;
     private JRadioButton optPaypal, optBar;
-    private JButton btnReset, btnDatei, btnDb, btnBeenden;
+    private JButton btnReset, btnDatei, btnBeenden;
 
     public GUI_Bestellform() {
         this.setTitle("Elitegloss – Paket-Bestellung");
@@ -117,19 +119,6 @@ public class GUI_Bestellform extends JFrame{
     c.insets = new Insets(7, 0, 0, 10);
     add(cboAnzahl, c);
 
-        lblTel = new JLabel("Tel.-Nr.:");
-    lblTel.setFont(fontLabel);
-    c.gridx = 0; c.gridy = 7;
-    c.insets = new Insets(5, 10, 0, 10);
-    add(lblTel, c);
-
-    txtTel = new JTextField(15);
-    txtTel.setFont(fontLabel);
-    c.gridx = 1; c.gridy = 7;
-    c.insets = new Insets(5, 0, 0, 10);
-    add(txtTel, c);
-
-        // ─ Telefon ─
     lblTel = new JLabel("Tel.-Nr.:");
     lblTel.setFont(fontLabel);
     c.gridx = 0; c.gridy = 7;
@@ -167,12 +156,15 @@ public class GUI_Bestellform extends JFrame{
     zahlungsart.add(optBar);
 
     //Buttons
+    MyActionListener actionlistner = new MyActionListener();
+
     btnReset = new JButton("Zurücksetzen");
     btnReset.setFont(fontButton);
     c.gridx = 0; c.gridy = 11;
     c.fill = GridBagConstraints.HORIZONTAL;
     c.insets = new Insets(10, 10, 5, 10);
     add(btnReset, c);
+    btnReset.addActionListener(actionlistner);
 
     btnDatei = new JButton("Speichern in Datei");
     btnDatei.setFont(fontButton);
@@ -180,13 +172,7 @@ public class GUI_Bestellform extends JFrame{
     c.fill = GridBagConstraints.HORIZONTAL;
     c.insets = new Insets(10, 0, 5, 10);
     add(btnDatei, c);
-
-        btnDb = new JButton("Speichern in DB");
-    btnDb.setFont(fontButton);
-    c.gridx = 0; c.gridy = 12;
-    c.fill = GridBagConstraints.HORIZONTAL;
-    c.insets = new Insets(10, 10, 15, 10);
-    add(btnDb, c);
+    btnDatei.addActionListener(actionlistner);
 
     btnBeenden = new JButton("Beenden");
     btnBeenden.setFont(fontButton);
@@ -194,6 +180,54 @@ public class GUI_Bestellform extends JFrame{
     c.fill = GridBagConstraints.HORIZONTAL;
     c.insets = new Insets(10, 0, 15, 10);
     add(btnBeenden, c);
+    btnBeenden.addActionListener(actionlistner);
+    
+
+    }
+    private class MyActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == btnReset){
+                resetForm();
+            } else if (e.getSource() == btnBeenden){
+                dispose();
+                //Main form öffnen
+            } else if (e.getSource() == btnDatei){
+                if (checkFormular()) {
+                    System.out.println("Print");
+                }
+            }
+
+        }
+    }
+    private boolean checkFormular(){
+        String name = txtName.getText().trim();
+        String tel = txtTel.getText().trim();
+
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bitte gib deinen Namen ein.");
+            txtName.requestFocus();
+            return false;
+        }
+
+        if (tel.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bitte gib deine Telefonnummer ein.");
+            txtTel.requestFocus();
+            return false;
+        }
+
+        return false;
+    }
+
+    private void resetForm() {
+        txtName.setText("");
+        txtTel.setText("");
+        cboPaket.setSelectedIndex(0);
+        cboAnzahl.setSelectedIndex(0);
+        optBar.setSelected(true);
+        optPaypal.setSelected(false);
+        chkFelgen.setSelected(false);
+        chkInnenreinigung.setSelected(false);
+        chkVersiegelung.setSelected(false);
 
     }
 }
