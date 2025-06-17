@@ -1,65 +1,34 @@
 package eletegloss.src;
-import java.math.BigDecimal;
 
+import java.math.BigDecimal;
 
 public class Paket {
 
-    // ─── Attribute ───────────────────────────────────────────────────────────────
-    private int aid;                 // Primärschlüssel (AUTO_INCREMENT in DB)
-    private int kid;                 // Kunde-ID (Fremdschlüssel)
-    private int pid;                 // Paket-ID  (Fremdschlüssel)
+    //Attribute
+    private String vname;
+    private String nname;
+    private String telnr;
 
-    private String vname;            // Vorname
-    private String nname;            // Nachname
-    private String emailAdresse;     // E-Mail
+    private String paketName;
+    private BigDecimal preis;
+    private String zusatzleistung;
+    private String zahlung;
 
-    private String pname;            // Paketname
-    private BigDecimal preis;        // Preis decimal(10,2)
-    private String zusatzleistung;   // kann NULL sein
+    //Konstruktoren 
+    public Paket() {}
 
-    // ─── Konstruktoren ───────────────────────────────────────────────────────────
-    /** Leerer Standardkonstruktor (wird z. B. von vielen Frameworks verlangt) */
-    public Paket() {
-        
-    }
-
-    /** Voller Konstruktor, falls Du alle Felder selbst setzen willst */
-    public Paket(int aid, int kid, int pid,
-                 String vname, String nname, String emailAdresse,
-                 String pname, BigDecimal preis, String zusatzleistung) {
-        this.aid             = aid;
-        this.kid             = kid;
-        this.pid             = pid;
+    public Paket(String vname, String nname, String telnr,
+                 String paketName, BigDecimal preis, String zusatzleistung, String zahlung) {
         this.vname           = vname;
         this.nname           = nname;
-        this.emailAdresse    = emailAdresse;
-        this.pname           = pname;
+        this.telnr           = telnr;
+        this.paketName       = paketName;
         this.preis           = preis;
         this.zusatzleistung  = zusatzleistung;
+        this.zahlung         = zahlung;
     }
 
-    // ─── Getter & Setter ─────────────────────────────────────────────────────────
-    public int getAid() {
-        return aid;
-    }
-    public void setAid(int aid) {
-        this.aid = aid;
-    }
-
-    public int getKid() {
-        return kid;
-    }
-    public void setKid(int kid) {
-        this.kid = kid;
-    }
-
-    public int getPid() {
-        return pid;
-    }
-    public void setPid(int pid) {
-        this.pid = pid;
-    }
-
+    //Getter & Setter
     public String getVname() {
         return vname;
     }
@@ -74,18 +43,18 @@ public class Paket {
         this.nname = nname;
     }
 
-    public String getEmailAdresse() {
-        return emailAdresse;
+    public String getTelnr() {
+        return telnr;
     }
-    public void setEmailAdresse(String emailAdresse) {
-        this.emailAdresse = emailAdresse;
+    public void setTelnr(String telnr) {
+        this.telnr = telnr;
     }
 
-    public String getPname() {
-        return pname;
+    public String getPaketName() {
+        return paketName;
     }
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setPaketName(String paketName) {
+        this.paketName = paketName;
     }
 
     public BigDecimal getPreis() {
@@ -101,20 +70,27 @@ public class Paket {
     public void setZusatzleistung(String zusatzleistung) {
         this.zusatzleistung = zusatzleistung;
     }
+    
 
-    // ─── toString (praktisch zum Ausgeben in der Konsole) ────────────────────────
+    public String getZahlung() {
+        return zahlung;
+    }
+
+    public void setZahlung(String zahlung) {
+        this.zahlung = zahlung;
+    }
+
+    //toString
     @Override
     public String toString() {
         return "Paket{" +
-               "aid=" + aid +
-               ", kid=" + kid +
-               ", pid=" + pid +
-               ", vname='" + vname + '\'' +
-               ", nname='" + nname + '\'' +
-               ", emailAdresse='" + emailAdresse + '\'' +
-               ", pname='" + pname + '\'' +
-               ", preis=" + preis +
-               ", zusatzleistung='" + zusatzleistung + '\'' +
-               '}';
+                ", vname='" + vname + '\'' +
+                ", nname='" + nname + '\'' +
+                ", telnr='" + telnr + '\'' +
+                ", paketName='" + paketName + '\'' +
+                ", preis=" + preis +
+                ", zusatzleistung='" + zusatzleistung + '\'' +
+                ", zahlung='" + zahlung + '\'' +
+                '}';
     }
 }

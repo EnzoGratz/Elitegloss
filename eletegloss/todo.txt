@@ -1,0 +1,77 @@
+**To-do Liste „Fahrzeug hinzufügen“**
+
+1. **Paket-Klasse prüfen**
+
+   * enthält bereits Felder `vname, nname, telnr, paketName, preis, zusatzleistung, zahlung` – passt.
+   * keine Änderungen nötig.
+
+2. **Neuen Dialog `FahrzeugDialog` anlegen**
+
+   * Datei `FahrzeugDialog.java` (Unterpaket `eletegloss.src`).
+   * Komponenten
+
+     * `JComboBox<String>` für Pakettyp
+     * drei `JCheckBox` für Extras
+     * OK / Abbrechen-Buttons
+   * Rückgabe: Methode `getErgebnis()` liefert ein **fertiges** `Paket`-Objekt (nur Paket & Extras befüllt).
+
+3. **GUI\_Bestellform erweitern**
+
+   1. **GUI-Felder**
+
+      * `DefaultListModel<Paket> listModel`
+      * `JList<Paket> lstFahrzeuge` (scrollbar)
+      * `JButton btnAddFahrzeug`, `btnSave`
+   2. **Layout-Änderungen**
+
+      * Button „Fahrzeug hinzufügen“ unter Telefon-/Zahlungsteil einfügen.
+      * Darunter `JScrollPane(lstFahrzeuge)` anzeigen (volle Breite, moderate Höhe).
+      * „Speichern Bestellung“-Button ans Ende setzen.
+   3. **ActionListener**
+
+      * `btnAddFahrzeug` → `fahrzeugHinzufuegen()`
+
+        1. Dialog instanziieren, sichtbar machen.
+        2. Ergebnisobjekt prüfen (`null` ⇒ Abbruch).
+        3. Objekt mit **Name, Telefon, Zahlung** anreichern.
+        4. In `listModel` aufnehmen.
+      * `btnSave` → `speichernBestellung()`
+
+        * Pflichtfelder prüfen.
+        * Prüfen, ob `listModel` leer ist.
+        * Schleife über `listModel` → Ausgabe in Konsole oder DB/File-Insert.
+        * Liste leeren, Formular zurücksetzen, „Bestellung gespeichert“-Message.
+
+4. **Preview-Text in JList**
+
+   * `toString()` von `Paket` eventuell anpassen, z. B.
+
+     ```java
+     return paketName + " [" + zusatzleistung + "]";
+     ```
+
+5. **Preisberechnung (optional)**
+
+   * Methode `ermittlePreis(paketName, extras)` schreiben und im Dialog vor dem Anlegen des Objekts aufrufen.
+
+6. **Daten­persistenz anpassen**
+
+   * Falls du in Datei speicherst: Schleife über `listModel`, jede Zeile als CSV.
+   * Falls Datenbank: pro `Paket` ein Insert in Tabelle `auftrag`.
+
+7. **Formular-Reset**
+
+   * `resetForm()` soll zusätzlich `listModel.clear()` aufrufen.
+
+8. **Testing**
+
+   * 1× Premium + 1× Basic hinzufügen → Liste zeigt zwei Einträge.
+   * Speichern → beide Objekte werden ausgegeben / weggeschrieben.
+   * Formular reset → Liste leer, Eingabefelder leer.
+
+9. **Feinschliff**
+
+   * Farben/Fonts der neuen Buttons an bestehende GUI angleichen.
+   * Dialoggröße fixieren (`setResizable(false)`), `pack()` verwenden.
+
+Damit hast du eine übersichtliche Roadmap, um mehrfach unterschiedliche Pakete in einer Bestellung zu erfassen.
