@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 
 public class GUI_Bestellform extends JFrame {
 
@@ -208,6 +209,8 @@ public class GUI_Bestellform extends JFrame {
                     int anzahl = (Integer) cboAnzahl.getSelectedItem();
                     String tel = txtTel.getText();
                     String zahlung = optPaypal.isSelected() ? "PayPal" : "Bar";
+                    BigDecimal preis = berechnePreis(paket, chkVersiegelung.isSelected(), chkFelgen.isSelected(),
+                    chkInnenreinigung.isSelected(), anzahl);
 
                     String extras = "";
                     if (chkVersiegelung.isSelected()) extras += "Lackversiegelung, ";
@@ -220,13 +223,13 @@ public class GUI_Bestellform extends JFrame {
                     bestellung += "Vorname: " + vName + "\n";
                     bestellung += "Name: " + nname + "\n";
                     bestellung += "Telefon: " + tel + "\n";
+                    bestellung += "Preis: " + preis + "\n";
                     bestellung += "Paket: " + paket + "\n";
                     bestellung += "Extras: " + extras + "\n";
                     bestellung += "Anzahl Fahrzeuge: " + anzahl + "\n";
                     bestellung += "Zahlung: " + zahlung + "\n";
 
-                    Paket neueBestellung = new Paket(vName, nname, tel, paket, null, extras, zahlung);
-//java.math.BigDecimal.ZERO
+                    Paket neueBestellung = new Paket(vName, nname, tel, paket, preis, extras, zahlung);
                     System.out.println(neueBestellung);
                 }
             }
@@ -271,4 +274,38 @@ public class GUI_Bestellform extends JFrame {
         chkInnenreinigung.setSelected(false);
         chkVersiegelung.setSelected(false);
     }
+
+    private BigDecimal berechnePreis(String paketName,
+                                    boolean versiegelung,
+                                    boolean felgen,
+                                    boolean innen,
+                                    int anzahl) {
+
+        BigDecimal basis = BigDecimal.ZERO;
+        BigDecimal aufpreis = BigDecimal.ZERO;
+
+        if (paketName.equals(PAKET_BASIC)) {
+            basis = new BigDecimal("49.90");
+        } else if (paketName.equals(PAKET_PREMIUM)) {
+            basis = new BigDecimal("79.90");
+        } else if (paketName.equals(PAKET_DELUXE)) {
+            basis = new BigDecimal("119.90");
+        } else {
+            basis = BigDecimal.ZERO;//Zur sicherheit (für mein Gewissen)
+        }
+
+        if (versiegelung) {
+            aufpreis = aufpreis.add(new BigDecimal("19.90"));
+        }
+        if (felgen) {
+            aufpreis = aufpreis.add(new BigDecimal("14.90"));
+        }
+        if (innen) {
+            aufpreis = aufpreis.add(new BigDecimal("24.90"));
+        }
+
+        BigDecimal einzelpreis = basis.add(aufpreis);
+        return einzelpreis.multiply(BigDecimal.valueOf(anzahl));
+    }
+
 }
