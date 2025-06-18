@@ -38,13 +38,13 @@ public class GUI_Bestellform extends JFrame {
         Font fontTitel = new Font("Segoe UI", Font.BOLD, 24);
         Font fontButton = new Font("Segoe UI", Font.BOLD, 15);
 
-        int row = 0;
+        int zeile = 0; //Einfacher
 
         // Überschrift
         lblUeberschrift = new JLabel("Elitegloss – Dein Fahrzeug, dein Glanz");
         lblUeberschrift.setFont(fontTitel);
         lblUeberschrift.setForeground(new Color(0x003366));
-        c.gridx = 0; c.gridy = row++;
+        c.gridx = 0; c.gridy = zeile++;
         c.gridwidth = 2;
         c.insets = new Insets(20, 10, 15, 10);
         add(lblUeberschrift, c);
@@ -54,98 +54,98 @@ public class GUI_Bestellform extends JFrame {
         // Vorname
         lblvName = new JLabel("Vorname:");
         lblvName.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.anchor = GridBagConstraints.WEST;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblvName, c);
 
         txtvName = new JTextField(15);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(5, 0, 0, 10);
         add(txtvName, c);
 
         // Nachname
         lblName = new JLabel("Nachname:");
         lblName.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblName, c);
 
         txtName = new JTextField(15);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(5, 0, 0, 10);
         add(txtName, c);
 
         // Paket
         lblPaket = new JLabel("Paket:");
         lblPaket.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblPaket, c);
 
         String[] pakete = { PAKET_BASIC, PAKET_PREMIUM, PAKET_DELUXE };
         cboPaket = new JComboBox<>(pakete);
         cboPaket.setFont(fontLabel);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(5, 0, 0, 10);
         add(cboPaket, c);
 
         // Zusatzleistungen
         lblExtras = new JLabel("Zusatzleistungen:");
         lblExtras.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row++;
+        c.gridx = 0; c.gridy = zeile++;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblExtras, c);
 
         chkVersiegelung = new JCheckBox("Lack­versiegelung");
         chkVersiegelung.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(3, 10, 0, 10);
         add(chkVersiegelung, c);
 
         chkFelgen = new JCheckBox("Felgenreinigung");
         chkFelgen.setFont(fontLabel);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(3, 0, 0, 10);
         add(chkFelgen, c);
 
         chkInnenreinigung = new JCheckBox("Innenraum-Detailing");
         chkInnenreinigung.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row++;
+        c.gridx = 0; c.gridy = zeile++;
         c.insets = new Insets(3, 10, 0, 10);
         add(chkInnenreinigung, c);
 
         // Anzahl
         lblAnzahl = new JLabel("Anzahl Fahrzeuge:");
         lblAnzahl.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(7, 10, 0, 10);
         add(lblAnzahl, c);
 
         Integer[] anzahlfahrz = { 1, 2, 3, 4, 5 };
         cboAnzahl = new JComboBox<>(anzahlfahrz);
         cboAnzahl.setFont(fontLabel);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(7, 0, 0, 10);
         add(cboAnzahl, c);
 
         // Telefon
         lblTel = new JLabel("Tel.-Nr.:");
         lblTel.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblTel, c);
 
         txtTel = new JTextField(15);
         txtTel.setFont(fontLabel);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(5, 0, 0, 10);
         add(txtTel, c);
 
         // Zahlung
         lblZahlung = new JLabel("Zahlung:");
         lblZahlung.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row++;
+        c.gridx = 0; c.gridy = zeile++;
         c.insets = new Insets(5, 10, 0, 10);
         add(lblZahlung, c);
 
@@ -153,14 +153,14 @@ public class GUI_Bestellform extends JFrame {
 
         optPaypal = new JRadioButton("PayPal");
         optPaypal.setFont(fontLabel);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.insets = new Insets(3, 10, 0, 10);
         add(optPaypal, c);
 
         optBar = new JRadioButton("Bar");
         optBar.setFont(fontLabel);
         optBar.setSelected(true);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.insets = new Insets(3, 0, 0, 10);
         add(optBar, c);
 
@@ -172,15 +172,15 @@ public class GUI_Bestellform extends JFrame {
 
         btnReset = new JButton("Zurücksetzen");
         btnReset.setFont(fontButton);
-        c.gridx = 0; c.gridy = row;
+        c.gridx = 0; c.gridy = zeile;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(10, 10, 5, 10);
         add(btnReset, c);
         btnReset.addActionListener(actionlistner);
 
-        btnDatei = new JButton("Speichern in Datei");
+        btnDatei = new JButton("Speichern");
         btnDatei.setFont(fontButton);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(10, 0, 5, 10);
         add(btnDatei, c);
@@ -188,7 +188,7 @@ public class GUI_Bestellform extends JFrame {
 
         btnBeenden = new JButton("Beenden");
         btnBeenden.setFont(fontButton);
-        c.gridx = 1; c.gridy = row++;
+        c.gridx = 1; c.gridy = zeile++;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(10, 0, 15, 10);
         add(btnBeenden, c);
@@ -219,7 +219,7 @@ public class GUI_Bestellform extends JFrame {
                     if (extras.endsWith(", ")) extras = extras.substring(0, extras.length() - 2);
                     if (extras.isEmpty()) extras = "Keine";
 
-                    String bestellung = "Elitegloss-Bestellung\n";
+                    String bestellung = "Elitegloss-Bestellung\n\n";
                     bestellung += "Vorname: " + vName + "\n";
                     bestellung += "Name: " + nname + "\n";
                     bestellung += "Telefon: " + tel + "\n";
@@ -228,6 +228,7 @@ public class GUI_Bestellform extends JFrame {
                     bestellung += "Extras: " + extras + "\n";
                     bestellung += "Anzahl Fahrzeuge: " + anzahl + "\n";
                     bestellung += "Zahlung: " + zahlung + "\n";
+                    JOptionPane.showMessageDialog(null, bestellung);
 
                     Paket neueBestellung = new Paket(vName, nname, tel, paket, preis, extras, zahlung);
                     System.out.println(neueBestellung);
